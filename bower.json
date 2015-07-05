@@ -1,0 +1,10 @@
+{
+  "name": "touchslider",
+  "version": "1.0.0",
+  "authors": "Link <zhoulink90@gmail.com>",
+  "main": "touchslider.js",
+  "license": "MIT",
+  "devDependencies": {
+    "jquery": "~2.1.1"
+  }
+}

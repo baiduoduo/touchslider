@@ -1,0 +1,44 @@
+ <!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>touchslider-demo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-app-status-bar-style" content="white">
+    <meta name="format-detection" content="telephone=no">
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../touchslider.js"></script>
+    <link rel="stylesheet" href="demo.css">
+
+  </head>
+  <body>
+
+  <div class="wcontainer">
+    <div class="sliders" id="sliders">
+      <div  class="sliderlist">
+        <img src="img/pic1.jpg" alt="">
+      </div>
+      <div  class="sliderlist">
+        <img src="img/pic2.jpg" alt="">
+      </div>
+      <div  class="sliderlist">
+        <img src="img/pic3.jpg" alt="">
+      </div>
+      <div  class="sliderlist">
+        <img src="img/pic4.jpg" alt="">
+      </div>
+    </div>
+  </div>
+  </body>
+  <script>
+    $("#sliders").touchSlider({
+      animatetime:300,
+      automatic:true,
+      timeinterval:4e3,
+      sliderpoint:true,
+      sliderpointwidth:8,
+      sliderpointcolor:"#fa9d00"
+    });
+  </script>
+</html>

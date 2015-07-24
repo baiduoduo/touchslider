@@ -17,7 +17,7 @@
 		//默认配置
 		var args = {
 				circulate: false, //循环
-				automatic: false, //自动播放
+				automatic: false, //自动播放需与leftrighttouch一起控制
 				sliderpoint: true, //小点
 				sliderpointwidth: 8, //点大小
 				sliderpointcolor: "#aaa", //点current颜色
@@ -39,14 +39,14 @@
 			position = {
 				index: 0,
 				notouch: false, //动画运行时不能操作slider
-				leftrighttouch: false, //是否是左右拖动
+				leftrighttouch: true, //是否是左右拖动
 				starttime: 0,
 				nowtime: 0,
 				endtime: 0,
 				start: [0, 0],
 				now: [0, 0],
 				end: [0, 0],
-				direction: 0, //动画方向 1向← -1向→  0不动
+				direction: 1, //动画方向 1向← -1向→  0不动
 				init: function(num) {
 					if (typeof num === "number") {
 						if (num < 0) {
@@ -350,11 +350,11 @@
 				//无拖动不触发动画 无动画结束 position.notouch一直为true bug
 				// console.log("无拖动position.notouch = true")
 				initpicposition();
-				position.notouch = true;
+				position.notouch = false;
 			} else {
 				picnomove();
 			}
-			position.leftrighttouch = false;
+			position.leftrighttouch = true;
 
 			//重启自动播放
 			if (args.automatic) {

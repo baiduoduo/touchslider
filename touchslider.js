@@ -350,7 +350,7 @@
 				//无拖动不触发动画 无动画结束 position.notouch一直为true bug
 				// console.log("无拖动position.notouch = true")
 				initpicposition();
-				position.notouch = true;
+				position.notouch = false;
 			} else {
 				picnomove();
 			}

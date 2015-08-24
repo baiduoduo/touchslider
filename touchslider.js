@@ -153,12 +153,12 @@
 		}
 
 		function autoplay() {
-			wubuslidersettime = setTimeout(picautoplay, args.timeinterval);
+			sliderbox.wubuslidersettime = setTimeout(picautoplay, args.timeinterval);
 		}
 		function picautoplay() {
 			initpicposition();
 			setTimeout(picgo);
-			wubuslidersettime = setTimeout(picautoplay, args.timeinterval);
+			sliderbox.wubuslidersettime = setTimeout(picautoplay, args.timeinterval);
 		}
 			// clearTimeout(wubuslidersettime)
 
@@ -248,7 +248,7 @@
 			// e.preventDefault()
 			//暂停自动播放
 			if (args.automatic) {
-				clearTimeout(wubuslidersettime);
+				clearTimeout(sliderbox.wubuslidersettime);
 			}
 			// var touches = e.originalEvent.changedTouches[0]
 			if(e.targetTouches){

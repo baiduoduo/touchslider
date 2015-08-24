@@ -126,7 +126,7 @@
 				"transition": args.animatetime / 1000 + "s ease-out",
 				"-webkit-transition": args.animatetime / 1000 + "s ease-out"
 			});
-			$(".currentsliderpoint").css({
+			$(this).find(".currentsliderpoint").css({
 				"background-color": args.sliderpointcolor
 			});
 		}

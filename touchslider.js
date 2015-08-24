@@ -7,11 +7,12 @@
 
 ;(function($) {
 	$.fn.touchSlider = function(thearguments) {
-		var picarrary = $(this).children();
+		var sliderbox=$(this);
+		var picarrary = sliderbox.children();
 		if (picarrary.size() == 1) return;
 		if(picarrary.size()==2){
-			$(this).append(picarrary.clone());
-			picarrary = $(this).children();
+			sliderbox.append(picarrary.clone());
+			picarrary = sliderbox.children();
 			therejusttwopic=true;
 		}
 		//默认配置
@@ -34,8 +35,8 @@
 			}
 		}
 		var ssize = picarrary.size(),
-			swidth = $(this).width(),
-			sheight = $(this).height(),
+			swidth = sliderbox.width(),
+			sheight = sliderbox.height(),
 			position = {
 				index: 0,
 				notouch: false, //动画运行时不能操作slider
@@ -70,7 +71,7 @@
 			};
 			//基本数据初始化
 		position.init();
-		$(this).css({
+		sliderbox.css({
 			"position": "relative"
 		}).find("a").click(function(e) {
 			e.preventDefault();
@@ -88,7 +89,7 @@
 			});
 			//小点
 		if (args.sliderpoint) {
-			$(this).append($("<ul class='pointlist'><li class='currentsliderpoint'></li></ul>"));
+			sliderbox.append($("<ul class='pointlist'><li class='currentsliderpoint'></li></ul>"));
 			//只有2个图片兼容
 			var pointmargin = Math.ceil(args.sliderpointwidth / 5);
 			var pointlistw = pointmargin * 2 + args.sliderpointwidth;
@@ -99,10 +100,10 @@
 				}
 			}else{
 				pointlistwidth=pointlistw * 2;
-				$(".pointlist").append($("<li></li>"));
+				sliderbox.find(".pointlist").append($("<li></li>"));
 			}
-			var pointlistli = $(this).find(".pointlist").find("li");
-			$(this).find(".pointlist").css({
+			var pointlistli = sliderbox.find(".pointlist").find("li");
+			sliderbox.find(".pointlist").css({
 				"width": pointlistwidth,
 				"height": pointlistw,
 				"position": "absolute",
@@ -126,7 +127,7 @@
 				"transition": args.animatetime / 1000 + "s ease-out",
 				"-webkit-transition": args.animatetime / 1000 + "s ease-out"
 			});
-			$(this).find(".currentsliderpoint").css({
+			sliderbox.find(".currentsliderpoint").css({
 				"background-color": args.sliderpointcolor
 			});
 		}
@@ -134,15 +135,15 @@
 
 
 		//touch事件
-		$(this).bind("touchstart", function(e) {
+		sliderbox.bind("touchstart", function(e) {
 			touchstart(e);
 		});
 
-		$(this).bind("touchmove", function(e) {
+		sliderbox.bind("touchmove", function(e) {
 			touchmove(e);
 		});
 
-		$(this).bind("touchend", function(e) {
+		sliderbox.bind("touchend", function(e) {
 			touchend(e);
 		});
 
@@ -210,7 +211,7 @@
 			}
 
 			if (time !== 0 && args.sliderpoint && position.direction !== 0) {
-				$(".currentsliderpoint").css({
+				sliderbox.find(".currentsliderpoint").css({
 					"background-color": args.sliderpointbgcolor
 				}).removeClass("currentsliderpoint");
 
@@ -363,7 +364,7 @@
 		}
 
 
-		return $(this);
+		return sliderbox;
 	};
 })((typeof(jQuery) != 'undefined') ? jQuery : window.Zepto);
 

@@ -246,6 +246,16 @@
 		function touchstart(e) {
 			// console.log(e)
 			// e.preventDefault()
+
+			//上下拖动，左右拖动有几率出现bug  上下左右都可拖动，这时微信中动画不执行，没有动画end事件notouch不会重置
+			//导致图片不能拖动bug
+			//这个同时解决了安卓手机微信中没有动画end事件的bug
+			//当拖动时动画 从时间判断动画肯定结束就 设置position.notouch=false  这样slider就又可以操作了
+			var animateisover=(e.timeStamp-position.endtime)>(parseInt(args.animatetime)*1.2);
+			if(position.notouch&&animateisover){
+				position.notouch=false;
+			}
+
 			//暂停自动播放
 			if (args.automatic) {
 				clearTimeout(sliderbox.wubuslidersettime);
@@ -265,7 +275,13 @@
 
 		function touchmove(e) {
 
-			if (position.notouch) return;
+			// $(".number>p:eq(0)").html(JSON.stringify(position.notouch)+Math.random())
+			
+			if (position.notouch){
+					return;
+			}
+
+			// $(".number>p:eq(1)").html(Math.random())
 			// var touches = e.originalEvent.changedTouches[0]
 			if(e.targetTouches){
 				var touches=e.targetTouches[0];
@@ -290,22 +306,26 @@
 			// htmlstr+="<br/>dy:"+dy
 			// $(".title").html(htmlstr)
 
-			if (dtime < 800 && !position.leftrighttouch) {
+			if (dtime < 500 && position.leftrighttouch) {
+
 				if (Math.abs(dx) > 6 && Math.abs(dy) < 20) {
+
+					// $(".number>p:eq(2)").html('preventDefault'+Math.random())
+
 					e.preventDefault();
 					position.leftrighttouch = true;
 				} else if (Math.abs(dx) < 20 && Math.abs(dy) > 20) {
+					position.leftrighttouch = false;
 					position.notouch = true;
 						//安卓拖动屏幕后不触发touchend事件
-					if (navigator.userAgent.match(/Android/i)) {
-						try {
-							clearTimeout(clearnotoucht);
-						} catch (event) {
+					// if (navigator.userAgent.match(/Android/i)) {
+					// 	try {
+					// 		clearTimeout(clearnotoucht);
+					// 	} catch (event) {
 
-						}
-						clearnotoucht = setTimeout(clearnotouch, 500);
-
-					}
+					// 	}
+					// 	clearnotoucht = setTimeout(clearnotouch, 500);
+					// }
 					return;
 				}
 			}
@@ -315,10 +335,24 @@
 			// console.log("leftrighttouch:"+position.leftrighttouch+"--notouch:"+position.notouch)
 			var x = dx;
 				// var dy=position.now[1]-position.start[1]
+
 			initpicposition(0, x);
 		}
 
 		function touchend(e) {
+				// $(".number>p:eq(5)").html("position.leftrighttouch:"+position.leftrighttouch+Math.random())
+
+			if(!position.leftrighttouch){
+				// $(".number>p:eq(4)").html("非左右拖动")
+				position.leftrighttouch=true;
+				position.notouch=false;
+				return;
+			}else if(position.notouch){
+				position.leftrighttouch=true;
+				// $(".number>p:eq(4)").html("翻页动画过程中  忽略翻页动作")
+				//翻页动画过程中  忽略翻页动作
+				return;
+			}
 			// e.preventDefault()
 			// console.log(e);
 			// var touches = e.originalEvent.changedTouches[0]
@@ -345,14 +379,20 @@
 			position.init();
 			if (dx > 30 && position.leftrighttouch) {
 				picback();
+				// $(".number>p:eq(3)").html("picback"+Math.random())
 			} else if (dx < -30 && position.leftrighttouch) {
 				picgo();
+				// $(".number>p:eq(3)").html("picgo"+Math.random())
+
 			} else if (Math.abs(dx) <= 10) {
 				//无拖动不触发动画 无动画结束 position.notouch一直为true bug
 				// console.log("无拖动position.notouch = true")
 				initpicposition();
 				position.notouch = false;
+				// $(".number>p:eq(3)").html("resetnotouch"+Math.random())
 			} else {
+				// $(".number>p:eq(3)").html("nothing"+Math.random())
+
 				picnomove();
 			}
 			position.leftrighttouch = true;
@@ -361,6 +401,8 @@
 			if (args.automatic) {
 				autoplay();
 			}
+
+
 		}
 
 

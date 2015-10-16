@@ -30,15 +30,34 @@
       </div>
     </div>
   </div>
+
+  <div class="number">
+    <p>0</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+  </div>
   </body>
   <script>
     $("#sliders").touchSlider({
-      animatetime:300,
+      animatetime:1000,
       automatic:true,
       timeinterval:4e3,
       sliderpoint:true,
       sliderpointwidth:8,
       sliderpointcolor:"#fa9d00"
     });
+
   </script>
+  <style>
+      .number{
+        position:absolute;
+        bottom:0;
+        left:0;
+        z-index:9999;
+      }
+  </style>
 </html>
